@@ -1,0 +1,24 @@
+from djitellopy import tello
+drone=tello.Tello()
+drone.connect()
+drone.takeoff()
+drone.move_up(80)
+drone.move_forward(50)
+drone.move_left(50)
+drone.move_backward(50)
+drone.move_right(50)
+drone.land()
+import cv2
+from cvzone.PoseModule import PoseDetector
+
+detector = PoseDetector()
+cap = cv2.VideoCapture(0)
+
+while True:
+    _, img = cap.read()
+    img = detector. findPose(img, draw=True)
+    detector.findPosition(img, draw=True)
+
+    cv2.imshow("image", img)
+    if cv2.waitKey(5) & 0xFF == ord('q'):
+      break
